@@ -1,0 +1,9 @@
+.post{
+    list-style: none;
+    max-width: 100rem;
+    margin: 2rem auto;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(5%);
+    justify-content:center;
+}
