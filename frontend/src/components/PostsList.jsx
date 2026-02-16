@@ -7,12 +7,15 @@ import classes from './PostList.module.css';
 
 function PostsList(isPosting,onStopPosting) { 
    const [posts, setPosts] = useState([]);
+   const [isFetching, setIsFetching] = useState(false);
 
    useEffect(()=>{ // prevents an infinite loop of fetching posts by only running the effect not everytime the component func exec.
     async function fetchPosts(){ 
+        setIsFetching(true);
         const response = await fetch('http://localhost:8080/posts');
         const resData = await response.json();
         setPosts(resData.posts); //update the posts state with the fetched data, which will trigger a re-render of the component to display the new posts.
+        setIsFetching(false);
     }
 
     fetchPosts();
@@ -36,18 +39,24 @@ function PostsList(isPosting,onStopPosting) {
             <NewPost onCancel={onStopPosting} onAddPost = {addPostHandler} />
         </Modal> 
      )}
-     {posts.length >0 && (
+     
+     { !isFetching && posts.length >0 && ( // if there are posts and not currently fetching, display the list of posts
      <ul className={classes.post}>
         {posts.map((post)=> (
             <Post key={post.body} author={post.author} body={post.body}/>
     ))}
     </ul>
      )}
-     {posts.length ===0 && (
+     { !isFetching && posts.length ===0 && ( // if there are no posts and not currently fetching, display a message to the user
         <div style ={{textAlign:'center', color:'white'}}>
         <h2> There are no posts yet.</h2>
         <p> Start adding a post!</p>
         </div>
+  )}
+  {isFetching && (
+    <div style ={{textAlign:'center', color:'white'}}>
+    <p>Loading posts...</p>
+   </div>
   )}
    </>
  );
