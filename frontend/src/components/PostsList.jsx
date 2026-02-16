@@ -8,15 +8,15 @@ import classes from './PostList.module.css';
 function PostsList(isPosting,onStopPosting) { 
    const [posts, setPosts] = useState([]);
 
-   useEffect(()=>{
-    async function fetchPosts(){
+   useEffect(()=>{ // prevents an infinite loop of fetching posts by only running the effect not everytime the component func exec.
+    async function fetchPosts(){ 
         const response = await fetch('http://localhost:8080/posts');
         const resData = await response.json();
-        setPosts(resData.posts);
+        setPosts(resData.posts); //update the posts state with the fetched data, which will trigger a re-render of the component to display the new posts.
     }
 
     fetchPosts();
-   },[]);
+   },[]); //
 
    function addPostHandler(postData){
     fetch('http://localhost:8080/posts',{ //used to get http reqest to backend and add post to database
