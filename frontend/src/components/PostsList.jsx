@@ -14,6 +14,8 @@ function PostsList(isPosting,onStopPosting) {
         setIsFetching(true);
         const response = await fetch('http://localhost:8080/posts');
         const resData = await response.json();
+       // if(!response.ok){} // exercise when resp is not fetching posts-error handling
+
         setPosts(resData.posts); //update the posts state with the fetched data, which will trigger a re-render of the component to display the new posts.
         setIsFetching(false);
     }
