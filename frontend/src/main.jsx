@@ -15,7 +15,7 @@ const router = createBrowserRouter([ // an array that takes an object that has o
         path:'/', 
       element: <Posts/>, 
       loader: postsLoader, // will execute function when the user acesses element router 
-      children:[{path:'/create-post', element: <NewPost/>}], // if the user tries to access a route that is not defined, they will see a message that says "Page not found"
+      children:[{path:'/create-post', element: <NewPost/>, action: ()=>{} }], // if the user tries to access a route that is not defined, they will see a message that says "Page not found"
     },
    ],
    },
