@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 
 import Post from './Post';
-import NewPost from './NewPost';
-import Modal from './Modal';
+
 import classes from './PostList.module.css';
 
-function PostsList(isPosting,onStopPosting) { 
+function PostsList() { 
    const [posts, setPosts] = useState([]);
    const [isFetching, setIsFetching] = useState(false);
 
@@ -36,12 +35,6 @@ function PostsList(isPosting,onStopPosting) {
 
   return (
     <>
-        {isPosting && ( 
-        <Modal onClose={onStopPosting}>
-            <NewPost onCancel={onStopPosting} onAddPost = {addPostHandler} />
-        </Modal> 
-     )}
-     
      { !isFetching && posts.length >0 && ( // if there are posts and not currently fetching, display the list of posts
      <ul className={classes.post}>
         {posts.map((post)=> (
