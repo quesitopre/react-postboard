@@ -11,7 +11,7 @@ function PostsList() {
      { posts.length >0 && ( // if there are posts and not currently fetching, display the list of posts
      <ul className={classes.post}>
         {posts.map((post)=> (
-            <Post key={post.body} author={post.author} body={post.body}/>
+            <Post key={post.id} id={post.id} author={post.author} body={post.body}/>
     ))}
     </ul>
      )}
