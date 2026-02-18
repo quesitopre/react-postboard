@@ -15,7 +15,7 @@ function PostsList() {
     ))}
     </ul>
      )}
-     { !isFetching && posts.length ===0 && ( // if there are no posts and not currently fetching, display a message to the user
+     {posts.length ===0 && ( // if there are no posts and not currently fetching, display a message to the user
         <div style ={{textAlign:'center', color:'white'}}>
         <h2> There are no posts yet.</h2>
         <p> Start adding a post!</p>

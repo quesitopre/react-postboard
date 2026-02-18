@@ -1,4 +1,4 @@
-import {Link,Form} from 'react-router-dom';
+import {Link,Form, redirect} from 'react-router-dom';
 
 import classes from './NewPost.module.css';
 import Modal from '../Modal';
@@ -27,14 +27,16 @@ function NewPost() {
 
 export default NewPost;
 
-export async function action({request}) {
+export async function action({request}) { // runs on client side 
   const formData = await request.formData(); // data destructuring, access to data within the form 
   const postData = Object.fromEntries(formData); // create a basic key value from from
-  fetch('http://localhost:8080/posts',{ //used to get http reqest to backend and add post to database
+  await fetch('http://localhost:8080/posts',{ //used to get http reqest to backend and add post to database
        method:'POST',
        body: JSON.stringify(postData), //converts the postData object into a JSON string to be sent in the request body
        headers: {
         'Content-Type':'application/json'
        },
     });
+
+    return redirect('/');// react-dom: Redirect to Posts page after submiting form
 }
