@@ -27,9 +27,9 @@ function NewPost() {
 
 export default NewPost;
 
-export async function action(request) {
+export async function action({request}) {
   const formData = await request.formData(); // data destructuring, access to data within the form 
-  formData.get('body'); // used to access the value of the form field with the name 'body'
+  const postData = Object.fromEntries(formData); // create a basic key value from from
   fetch('http://localhost:8080/posts',{ //used to get http reqest to backend and add post to database
        method:'POST',
        body: JSON.stringify(postData), //converts the postData object into a JSON string to be sent in the request body
