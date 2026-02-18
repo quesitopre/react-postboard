@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 
 import classes from './NewPost.module.css';
 import Modal from '../Modal';
-function NewPost({ onAddPost }) {
+function NewPost() {
  const [enteredBody,setEnteredBody] = useState('');
  const [enteredAuthor,setEnteredAuthor] = useState('');
 
@@ -21,8 +21,13 @@ function NewPost({ onAddPost }) {
         body: enteredBody,
         author: enteredAuthor
       };
-      onAddPost(postData);
-      onCancel();
+      fetch('http://localhost:8080/posts',{ //used to get http reqest to backend and add post to database
+       method:'POST',
+       body: JSON.stringify(postData), //converts the postData object into a JSON string to be sent in the request body
+       headers: {
+        'Content-Type':'application/json'
+       }
+    });
     }
  
   return (
